@@ -1,6 +1,10 @@
 import glob
+import operator
+
 Textfiles = glob.glob("*.txt")
 
+def sort(List):
+    return List.sort( reverse = True)
 
 def filehandler(file):
     Info = {}
@@ -23,7 +27,7 @@ def filehandler(file):
         TempLibDict["nBooks_lib"] = Item1[0]
         TempLibDict["signup"] = Item1[1]
         TempLibDict["capacity"] = Item1[2]
-        TempLibDict["BookList"] = Item2
+        TempLibDict["BookList"] = [k for k,v in sorted([(Item2[i], Info["Scores"][Item2[i]][1]) for i in range(len(Item2))], key = operator.itemgetter(1), reverse=True)]
         Info["Lib"+str(i)] = TempLibDict
 
     print(Info)
